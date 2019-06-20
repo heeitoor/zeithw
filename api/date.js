@@ -7,5 +7,5 @@ module.exports = async (req, res) => {
   const result = (await axios.default.get('https://reqres.in/api/users?page=2'))
     .data;
 
-  res.end(JSON.stringify({ currentTime, result }));
+  res.end(JSON.stringify({ currentTime, result, env: process.env.key }));
 };
