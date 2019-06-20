@@ -1,7 +1,11 @@
-const moment = require('moment')
+const moment = require('moment');
+const axios = require('axios');
 
-module.exports = (req, res) => {
-  const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a')
+module.exports = async (req, res) => {
+  const currentTime = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-  res.end(currentTime)
-}
+  const result = (await axios.default.get('https://reqres.in/api/users?page=2'))
+    .data;
+
+  res.end(JSON.stringify({ currentTime, result }));
+};
